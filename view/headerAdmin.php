@@ -27,7 +27,7 @@
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Productos</a></li>
+						<li><a href="menuAdmin.php?modo=gProduct">Productos</a></li>
 						<li><a href="#">Pedidos</a></li>
 						<li><a href="#">Nutrionista</a></li>
 						<li><a href="#">Reportes</a></li>

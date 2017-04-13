@@ -71,18 +71,23 @@ class ManagePage
     }
 
   }
-
-  public function MenuAdmin($login)
+  //agregar session al menu
+  public function MenuAdmin()
   {
     switch ($this->Modo) {
-      case '':
-        # code...
+      case 'gProduct':
+        include 'headerAdmin.php';
+        include 'bodyProduct.php';
+        include 'footerAdmin.php';
         break;
 
       default:
-        echo "Bienvenido  ".$login->getEmail();
-        header('Location: view/menuAdmin.php');
+        //echo "Bienvenido  ".$login->getEmail();
+        //header('Location: view/menuAdmin.php');
         //header("Location: view/menuAdmin.php?u=".urlencode($login)); 
+        include 'headerAdmin.php';
+        include 'bodyAdmin.php';
+        include 'footerAdmin.php';
         exit;
         break;
     }
