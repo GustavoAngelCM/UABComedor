@@ -53,6 +53,7 @@ class ManagePage
           break;
 
       case 'CampLlenos':
+          include 'model/session.php';
           include 'model/login.php';
           include 'model/ConsultasBasicas.php';
           include 'model/conexion.php';
@@ -69,9 +70,7 @@ class ManagePage
         include 'view/footerIn.php';
         break;
     }
-
   }
-  //agregar session al menu
   public function MenuAdmin()
   {
     switch ($this->Modo) {
@@ -81,10 +80,13 @@ class ManagePage
         include 'footerAdmin.php';
         break;
 
+      case 'cerrarSesion':
+        session_start();
+        session_destroy();
+        header("Location: ../index.php");
+        break;
+
       default:
-        //echo "Bienvenido  ".$login->getEmail();
-        //header('Location: view/menuAdmin.php');
-        //header("Location: view/menuAdmin.php?u=".urlencode($login)); 
         include 'headerAdmin.php';
         include 'bodyAdmin.php';
         include 'footerAdmin.php';

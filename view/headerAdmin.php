@@ -26,15 +26,15 @@
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
+						<li class="active"><a href="menuAdmin.php">Home</a></li>
 						<li><a href="menuAdmin.php?modo=gProduct">Productos</a></li>
 						<li><a href="#">Pedidos</a></li>
 						<li><a href="#">Nutrionista</a></li>
 						<li><a href="#">Reportes</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">Gustavo</a></li>
-						<li><a href="../index.php"><span class="fa fa-sign-out"></span> Salir</a></li>
+						<li><a href="#"><?php echo $_SESSION['user']; ?></a></li>
+						<li><a href="menuAdmin.php?modo=cerrarSesion"><span class="fa fa-sign-out"></span> Salir</a></li>
 					</ul>
 				</div>
 			</div>
