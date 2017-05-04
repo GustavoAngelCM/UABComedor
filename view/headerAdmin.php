@@ -14,7 +14,7 @@
 
 	<header>
 
-		<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: black; opacity:0.8">
+		<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: black; opacity:0.91">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -27,7 +27,16 @@
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="menuAdmin.php">Home</a></li>
-						<li><a href="menuAdmin.php?modo=gProduct">Productos</a></li>
+						<li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Productos <span class="caret"></span></a>
+		          <ul class="dropdown-menu" style="background: white; ">
+		            <li><a href="menuAdmin.php?modo=gCategoriaProducto">Categoria Y Metrica</a></li>
+		            <li><a href="#">Categoria Plato</a></li>
+		            <li role="separator" class="divider"></li>
+		            <li><a href="menuAdmin.php?modo=gProduct">Gestionar Productos</a></li>
+								<li><a href="#">Ingresar Producto a Almacen</a></li>
+		          </ul>
+		        </li>
 						<li><a href="#">Pedidos</a></li>
 						<li><a href="#">Nutrionista</a></li>
 						<li><a href="#">Reportes</a></li>

@@ -80,6 +80,76 @@ class ManagePage
         include 'footerAdmin.php';
         break;
 
+      // CRUD DE CATEGORIA Y METRICA START
+      case 'gCategoriaProducto':
+        include 'headerAdmin.php';
+        include 'bodyCatProducto.php';
+        include 'footerAdmin.php';
+        break;
+
+      case 'forVacioCat':
+        include 'headerAdmin.php';
+        ?>
+        <div class="alert alert-warning alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong><i class="fa fa-exclamation-triangle"></i>¡Advertencia!</strong> <p>Por Favor llene el Formulario</p>
+        </div>
+        <?php
+        include 'bodyCatProducto.php';
+        include 'footerAdmin.php';
+        break;
+
+      case 'rExitoCat':
+        include 'headerAdmin.php';
+        ?>
+        <div class="alert alert-success alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong><i class="fa fa-check-circle"></i>¡Exito!</strong> <p>Al Registrar Categoria</p>
+        </div>
+        <?php
+        include 'bodyCatProducto.php';
+        include 'footerAdmin.php';
+        break;
+
+      case 'eDupCat':
+        include 'headerAdmin.php';
+        ?>
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong> <i class="fa fa-times-circle"></i> ¡ERROR!</strong> <p>La Categoria ya Existe</p>
+        </div>
+        <?php
+        include 'bodyCatProducto.php';
+        include 'footerAdmin.php';
+        break;
+
+      case 'eRegCat':
+        include 'headerAdmin.php';
+        ?>
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong> <i class="fa fa-times-circle"></i> ¡ERROR!</strong> <p>Error al Registrar</p>
+        </div>
+        <?php
+        include 'bodyCatProducto.php';
+        include 'footerAdmin.php';
+        break;
+
+      case 'rCat':
+        if (isset($_POST['datos'])) {
+          include '../model/conexion.php';
+          include '../model/categoria.php';
+          include '../model/consultasBasicas.php';
+          include '../model/insert.php';
+          include '../controller/ctrCategoria.php';
+          $con = new Conexion();
+          $manage = new ManageCategoria($con);
+          $manage->registrarCategoria($_POST['nombre']);
+        }else {
+          header("Location: menuAdmin.php?modo=forVacioCat");
+        }
+        break;
+      // CRUD DE CATEGORIA Y METRICA END
       case 'cerrarSesion':
         session_start();
         session_destroy();

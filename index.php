@@ -1,5 +1,5 @@
 <?php
-  
+
   include 'controller/ctrIndex.php';
 
   if (isset($_GET['modo'])) {
