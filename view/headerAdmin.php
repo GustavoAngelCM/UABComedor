@@ -6,7 +6,9 @@
 	<meta charset="UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/estiloMenAdmin.css">
+	<link rel="stylesheet" href="css/tabsDespachos.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-select.min.css">
   <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
 
 </head>
@@ -37,12 +39,12 @@
 								<li><a href="#">Ingresar Producto a Almacen</a></li>
 		          </ul>
 		        </li>
-						<li><a href="#">Pedidos</a></li>
+						<li><a href="menuAdmin.php?modo=gDespachos">Despachos</a></li>
 						<li><a href="#">Nutrionista</a></li>
 						<li><a href="#">Reportes</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#"><?php echo $_SESSION['user']; ?></a></li>
+						<li><a href="#"><?php echo ucwords(strtolower($_SESSION['user'])); ?></a></li>
 						<li><a href="menuAdmin.php?modo=cerrarSesion"><span class="fa fa-sign-out"></span> Salir</a></li>
 					</ul>
 				</div>

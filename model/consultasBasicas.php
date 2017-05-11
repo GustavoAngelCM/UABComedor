@@ -80,6 +80,29 @@ class ConsultasBasicas
     }
   }
 
+  public function existeProducto($name, $conn)
+  {
+    $consulta = $conn->prepare('SELECT * FROM producto where nombreProducto=:name');
+    $consulta->bindParam(':name', $name);
+    $consulta->execute();
+    $registro = $consulta->fetch();
+
+    if ($registro) {
+      return $registro;
+    }else {
+      $registro = 0;
+      return $registro;
+    }
+  }
+
+  public function listaProductos($conn)
+  {
+    $consulta = $conn->prepare('SELECT * FROM producto ORDER BY nombreProducto');
+    $consulta->execute();
+    $registro = $consulta->fetchAll();
+    return $registro;
+  }
+
 }
 
 

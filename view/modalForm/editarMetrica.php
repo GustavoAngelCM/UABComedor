@@ -20,6 +20,9 @@
             </div>
           </div>
           <input type="hidden" name="datos" value="1">
+          <input type="hidden" name="id" value="<?php echo $listaM->IdMetrica; ?>">
+          <input type="hidden" name="name" value="<?php echo $listaM->NombreMetrica; ?>">
+          <input type="hidden" name="abr" value="<?php echo $listaM->Abreviatura; ?>">
         </div>
         <div class="modal-footer">
           <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancelar <i class="fa fa-times-circle"></i></button>

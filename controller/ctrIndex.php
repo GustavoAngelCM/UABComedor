@@ -217,6 +217,70 @@ class ManagePage
         break;
 
       // CRUD DE CATEGORIA Y METRICA END
+// CRUD PRODUCTOS START /////////////////////////////////////////////////////////////////////
+      case 'rProd':
+        if (isset($_POST['datos'])) {
+          include '../model/conexion.php';
+          include '../model/categoria.php';
+          include '../model/consultasBasicas.php';
+          include '../model/insert.php';
+          include '../model/metrica.php';
+          include '../model/producto.php';
+          include '../controller/ctrProducto.php';
+          $con = new Conexion();
+          $manage = new ManageProducto($con);
+          $manage->insertar($_POST['nombre'], $_POST['categoria'], $_POST['metrica']);
+        }else {
+          header("Location: menuAdmin.php?modo=forVacioProd");
+        }
+        break;
+
+      case 'exiRegProd':
+        include 'headerAdmin.php';
+        ?>
+        <div class="alert alert-success alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong><i class="fa fa-check-circle"></i>¡Exito!</strong> <p>Al Registrar Producto</p>
+        </div>
+        <?php
+        include 'bodyProduct.php';
+        include 'footerAdmin.php';
+        break;
+
+      case 'errRegProd':
+        include 'headerAdmin.php';
+        ?>
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong><i class="fa fa-times-circle"></i>Error!</strong> <p>Al Registrar Producto</p>
+        </div>
+        <?php
+        include 'bodyProduct.php';
+        include 'footerAdmin.php';
+        break;
+
+      case 'pExi':
+        include 'headerAdmin.php';
+        ?>
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong><i class="fa fa-times-circle"></i>¡Error!</strong> <p>Al Registrar Producto Existente</p>
+        </div>
+        <?php
+        include 'bodyProduct.php';
+        include 'footerAdmin.php';
+        break;
+
+// CRUD PRODUCTOS END //////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////// CRUD DESPACHOS START
+      case 'gDespachos':
+        include 'headerAdmin.php';
+        include 'despachosForm.php';
+        include 'footerAdmin.php';
+        break;
+///////////////////////////////////////////////////////////////////// CRUD DESPACHOS END
+
       case 'cerrarSesion':
         session_start();
         session_destroy();

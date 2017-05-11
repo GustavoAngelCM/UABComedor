@@ -1,3 +1,20 @@
+<?php
+include '../model/conexion.php';
+include '../model/categoria.php';
+include '../model/metrica.php';
+include '../model/producto.php';
+include '../model/consultasBasicas.php';
+include '../controller/ctrCategoria.php';
+include '../controller/ctrMetrica.php';
+include '../controller/ctrProducto.php';
+$con = new Conexion();
+$manageCat = new ManageCategoria($con);
+$listaCat = $manageCat->listaCategoria();
+$manageMet = new ManageMetrica($con);
+$listaMet = $manageMet->lista();
+$manageProd = new ManageProducto($con);
+$listaProd = $manageProd->listar();
+?>
 <div class="container">
         <div class="text-center well" style="opacity:0.6">
             <h1>Productos</h1>
@@ -38,54 +55,25 @@
                     <table class="table table-hover" id="dev-table" >
 
                       <tbody class="text-center">
-												<tr>
-													<td>1</td>
-													<td>script</td>
-													<td>caac</td>
-													<td>xcvxc</td>
-													<td>ssdv00</td>
-													<td>fgfd</td>
-												</tr>
-												<tr>
-													<td>2</td>
-													<td>script</td>
-													<td>caac</td>
-													<td>xcvxc</td>
-													<td>ssdv00</td>
-													<td>fgfd</td>
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>script</td>
-													<td>caac</td>
-													<td>xcvxc</td>
-													<td>ssdv00</td>
-													<td>fgfd</td>
-												</tr>
-												<tr>
-													<td>4</td>
-													<td>script</td>
-													<td>caac</td>
-													<td>xcvxc</td>
-													<td>ssdv00</td>
-													<td>fgfd</td>
-												</tr>
-												<tr>
-													<td>5</td>
-													<td>script</td>
-													<td>caac</td>
-													<td>xcvxc</td>
-													<td>ssdv00</td>
-													<td>fgfd</td>
-												</tr>
-												<tr>
-													<td>6</td>
-													<td>script</td>
-													<td>caac</td>
-													<td>xcvxc</td>
-													<td>ssdv00</td>
-													<td>fgfd</td>
-												</tr>
+
+                        <?php
+                        $i = 1;
+                              foreach ($listaProd as $listaP): ?>
+                          <tr>
+                            <td><?php echo $i++; ?></td>
+                            <td><?php echo ucwords(strtolower($listaP->NombreProducto)); ?></td>
+                            <td><?php echo $listaP->C_Categoria->NombreCategoria; ?></td>
+                            <td><a href="#ver<?php echo $listaP->IdProducto; ?>" class="btn btn-danger efec" data-toggle="modal"><i class="fa fa-eye"></i></a></td>
+                            <td><a href="#editar<?php echo $listaP->IdProducto; ?>" class="btn btn-primary efec" data-toggle="modal"><i class="fa fa-pencil"></i></a></td>
+                            <td>
+                              <form  id="dardeBajaProd">
+                                <input type="hidden" name="id" value="<?php echo $listaP->IdProducto; ?>">
+                                <button type="submit" name="dabaja" class="btn btn-success efec"><i class="fa fa-toggle-on"></i></button>
+                              </form>
+                            </td>
+                          </tr>
+                        <?php endforeach; ?>
+
                       </tbody>
                     </table>
                   </div>
@@ -95,3 +83,6 @@
               <div class="col-sm-1 col-md-2"></div>
             </div>
     	  </div>
+<?php
+  include 'modalForm/registroProducto.php';
+?>
