@@ -149,6 +149,73 @@ class ManagePage
           header("Location: menuAdmin.php?modo=forVacioCat");
         }
         break;
+
+      case 'rMet':
+        if (isset($_POST['datos'])) {
+          include '../model/conexion.php';
+          include '../model/metrica.php';
+          include '../model/consultasBasicas.php';
+          include '../model/insert.php';
+          include '../controller/ctrMetrica.php';
+          $con = new Conexion();
+          $manage = new ManageMetrica($con);
+          $manage->crear($_POST['nombre'], $_POST['abrev']);
+        }else {
+          header("Location: menuAdmin.php?modo=forVacioCat");
+        }
+        break;
+
+      case 'eCat':
+        if (isset($_POST['datos'])) {
+          include '../model/conexion.php';
+          include '../model/categoria.php';
+          include '../model/consultasBasicas.php';
+          include '../model/editar.php';
+          include '../controller/ctrCategoria.php';
+          $con = new Conexion();
+          $manage = new ManageCategoria($con);
+          $manage->editar($_POST['nombre'], $_POST['id'], $_POST['name']);
+        }else {
+          header("Location: menuAdmin.php?modo=forVacioCat");
+        }
+        break;
+
+      case 'errEditCat':
+        include 'headerAdmin.php';
+        ?>
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong> <i class="fa fa-times-circle"></i> ¡ERROR!</strong> <p>Error al Editar Producto</p>
+        </div>
+        <?php
+        include 'bodyCatProducto.php';
+        include 'footerAdmin.php';
+        break;
+
+      case 'editCat':
+        include 'headerAdmin.php';
+        ?>
+        <div class="alert alert-success alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong><i class="fa fa-check-circle"></i>¡Exito!</strong> <p>Al Editar Categoria</p>
+        </div>
+        <?php
+        include 'bodyCatProducto.php';
+        include 'footerAdmin.php';
+        break;
+
+      case 'rExitoMet':
+        include 'headerAdmin.php';
+        ?>
+        <div class="alert alert-success alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong><i class="fa fa-check-circle"></i>¡Exito!</strong> <p>Al Registrar Unidad de Medida</p>
+        </div>
+        <?php
+        include 'bodyCatProducto.php';
+        include 'footerAdmin.php';
+        break;
+
       // CRUD DE CATEGORIA Y METRICA END
       case 'cerrarSesion':
         session_start();

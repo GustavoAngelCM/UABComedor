@@ -31,6 +31,36 @@ class Insert
 
   }
 
+  public function insertarMetrica($metrica, $conn)
+  {
+    $id = $metrica->IdMetrica;
+    $name = $metrica->NombreMetrica;
+    $abrev = $metrica->Abreviatura;
+    $error = 1;
+    try {
+
+      $conn->beginTransaction();
+
+      $met_insert = 'INSERT INTO udiadmedida (idUnidMedida, nombre, abreviatura)
+                    VALUES (:idUnidMedida, :nombre, :abreviatura);';
+
+      $stmtMet = $conn->prepare($met_insert);
+
+      $stmtMet->bindParam(':idUnidMedida', $id);
+      $stmtMet->bindParam(':nombre', $name);
+      $stmtMet->bindParam(':abreviatura', $abrev);
+
+      $stmtMet->execute();
+
+      $conn->commit();
+      $error = 0;
+    } catch (PDOException $e) {
+      $error = 1;
+      $conn->rollBack();
+    }
+    return $error;
+  }
+
 }
 
 ?>

@@ -45,6 +45,35 @@ class ManageCategoria
 
   }
 
+  public function editar($nombre, $id, $name)
+  {
+
+    if (strtolower($nombre) != strtolower($name)) {
+
+      $consulta = new ConsultasBasicas();
+      $cat = new Categoria($nombre);
+      $cat->IdCategoria = $id;
+
+      $existe =  $consulta->existeCategoriaEditar($nombre, $id, $this->Conexion);
+
+      if ($existe == 0) {
+        $edit = new Editar();
+        $error = $edit->editarCat($cat, $this->Conexion);
+        if ($error == 0 ) {
+          header("Location: menuAdmin.php?modo=editCat");
+        }else {
+          header("Location: menuAdmin.php?modo=errEditCat");
+        }
+      }else {
+        header("Location: menuAdmin.php?modo=eDupCat");
+      }
+
+    }else {
+      header("Location: menuAdmin.php?modo=gCategoriaProducto");
+    }
+
+  }
+
 }
 
 ?>
