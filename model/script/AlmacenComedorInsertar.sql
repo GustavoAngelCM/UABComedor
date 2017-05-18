@@ -10,6 +10,8 @@ INSERT INTO Usuarios VALUE(null, 2, "elsy", "Y1VWZnp6YnBCTmNra2J3SGFGOFp0QT09", 
 INSERT INTO Usuarios VALUE(null, 2, "gladiz", "NzlpUlgvRFFxQWl0ZXkyTlpCNkNKUT09", "gladiz@gmail.com", 1);
 INSERT INTO Usuarios VALUE(null, 2, "miriam", "ai9XdkY1L1JJWGFmSFpXRkRPMitjUT09", "miriam@gmail.com", 0);
 INSERT INTO Usuarios VALUE(null, 1, "vanesa", "RDNLK1JSSHpHdCtJSUczV3ArbmJvdz09", "vanesa@gmail.com", 1);
+INSERT INTO Usuarios VALUE(null, 1, "rodrigo", "NFRhZjZmSTlGS25NVjlwKzl1OC9kdz09", "rodrigopoma8@gmail.com", 1);
+
 
 -- 3. Unidad Medida
 INSERT INTO udiadMedida VALUE(null, "Litros", "lt");

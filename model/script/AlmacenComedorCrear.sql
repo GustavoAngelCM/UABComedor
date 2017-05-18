@@ -4,12 +4,12 @@ USE AlmacenComedor;
 
 
 CREATE TABLE TipoUsuario(
-    idTipoUsuario int unsigned not null auto_increment primary key,
+    idTipoUsuario int not null auto_increment primary key,
     nombreTipo varchar(40) not null
 );
 
 CREATE TABLE Usuarios(
-    idUsuario int unsigned not null auto_increment primary key,
+    idUsuario int  not null auto_increment primary key,
     idTipoUsuario int not null,
     usuario varchar(25) unique not null,
     contrasena text not null,
@@ -68,7 +68,7 @@ create table receta(
 
 -- 7 Almacen
 CREATE TABLE almacen(
-    idAlmacen int unsigned not null auto_increment primary key,
+    idAlmacen int not null auto_increment primary key,
     idProducto int not null,
     cantidad float(8,2) not null,
     FOREIGN KEY (idProducto) REFERENCES producto (idProducto) ON UPDATE CASCADE ON DELETE CASCADE
@@ -76,7 +76,7 @@ CREATE TABLE almacen(
 
 -- 8 Detalle de Almacen
 CREATE TABLE detalleAlmacen(
-    idDetalle int unsigned not null auto_increment primary key,
+    idDetalle int not null auto_increment primary key,
     idAlmacen int not null,
     cantidadIngresada float not null,
     fechaVencimiento date null,
@@ -89,7 +89,7 @@ CREATE TABLE detalleAlmacen(
 
 -- 9  Factura
 CREATE TABLE factura(
-    idFactura int unsigned not null auto_increment primary key,
+    idFactura int not null auto_increment primary key,
     idDetalle int not null,
     numFactura varchar(45),
     valorIVA varchar(45),
