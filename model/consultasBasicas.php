@@ -103,6 +103,23 @@ class ConsultasBasicas
     return $registro;
   }
 
+  public function listaPedidos($conn)
+  {
+    $consulta = $conn->prepare('SELECT * FROM pedido');
+    $consulta->execute();
+    $registro = $consulta->fetchAll();
+    return $registro;
+  }
+
+  public function listaDetallePedido($conn, $id)
+  {
+    $consulta = $conn->prepare('SELECT * FROM detallepedido where idPedido = :id');
+    $consulta->bindParam(":id", $id);
+    $consulta->execute();
+    $registro = $consulta->fetchAll();
+    return $registro;
+  }
+
 }
 
 
