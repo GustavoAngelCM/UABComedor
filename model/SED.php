@@ -28,6 +28,6 @@
 		}
 	}
 	$set=new SED();
-	$nombre=$set->encryption("rodrigo");
+	$nombre=$set->encryption("jhonny");
 	echo $nombre;
 ?>
