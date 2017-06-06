@@ -92,10 +92,10 @@ $litaMet = $manageMet->lista();
 
                 </div>
                 <div class="panel-body" style="display: none">
-                  <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Buscar Unidad de Medida" />
+                  <input type="text" class="form-control" id="task-table-filter" data-action="filter" data-filters="#task-table" placeholder="Buscar Unidad de Medida" />
                 </div>
                 <div class="table-responsive" style="height:350px;overflow-y:scroll;;">
-                  <table class="table table-hover" id="dev-table" >
+                  <table class="table table-hover" id="task-table" >
 
                     <tbody class="text-center">
                       <?php $i = 1;

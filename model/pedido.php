@@ -7,8 +7,9 @@ class Pedido
   private $CantidadPlato;
   private $PedidoDespachado;
   private $FechaPedido;
-  private $C_Plato;
 
+  private $C_Plato;
+  
   private $ListaDetallePedido;
 
   function __construct($cantidad, $plato)
