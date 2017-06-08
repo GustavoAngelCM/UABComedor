@@ -9,7 +9,7 @@ class Pedido
   private $FechaPedido;
 
   private $C_Plato;
-  
+
   private $ListaDetallePedido;
 
   function __construct($cantidad, $plato)
@@ -18,7 +18,7 @@ class Pedido
     $this->CantidadPlato = $cantidad;
     $this->PedidoDespachado = false;
     $this->FechaPedido = "now()";
-    $this->$C_Plato = $plato;
+    $this->C_Plato = $plato;
     $this->ListaDetallePedido = array();
   }
 

@@ -279,6 +279,24 @@ class ManagePage
         include 'despachosForm.php';
         include 'footerAdmin.php';
         break;
+
+      case 'despacharPedidos':
+        include '../model/conexion.php';
+        include '../model/pedido.php';
+        include '../model/PedidoConsulta.php';
+        include '../model/detallePedido.php';
+        include '../model/despacho.php';
+        include '../model/DespachoConsulta.php';
+        include '../model/DetallePedidoConsulta.php';
+        include '../controller/ctrPedido.php';
+
+        $conexion = new Conexion();
+        $despachoManage = new ManageDespacho($conexion);
+        $despachoManage->registrar();
+
+        $conexion = new Conexion();
+        echo "hola";
+        break;
 ///////////////////////////////////////////////////////////////////// CRUD DESPACHOS END
 
       case 'cerrarSesion':

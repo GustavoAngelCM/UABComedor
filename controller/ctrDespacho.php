@@ -10,7 +10,7 @@ class ManageDespacho;
     $this->Conexion = $conexion;
   }
 
-  public function registrar($cantidad, $precio, $fecha, $observaciones, $almacen, $plato, $usuario)
+  public function registrar()
   {
     
   }

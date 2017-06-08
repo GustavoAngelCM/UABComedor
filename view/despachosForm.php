@@ -1,3 +1,19 @@
+<?php
+include '../model/conexion.php';
+include '../model/pedido.php';
+include '../model/PedidoConsulta.php';
+include '../model/detallePedido.php';
+include '../model/DetallePedidoConsulta.php';
+include '../controller/ctrPedido.php';
+
+$conexion = new Conexion();
+
+$pedidoManage = new ManagePedido($conexion);
+$listaPedidos = $pedidoManage->listar();
+$i = 0;
+//var_dump($listaPedidos);
+
+?>
 <div class="container">
   <div class="row">
 
@@ -19,24 +35,49 @@
         <!-- Tab panes -->
         <div class="tab-content card">
           <div role="tabpanel" class="tab-pane active" id="pedidos">
-
+            <button type="button" name="despachar" class="btn btn-success btn-lg" id="despacharPedidos">Despachar Pedidos</button>
+            <br><div id="mensaje"></div><br>
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingTwo">
-                  <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                      Collapsible Group Item #2
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                  <div class="panel-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+              <?php foreach ($listaPedidos as $listaP): $i++;?>
+
+                <div class="panel panel-warning">
+                  <div class="panel-heading" role="tab" id="headingTwo">
+                    <h4 class="panel-title">
+                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $listaP->IdPedido ?>" aria-expanded="false" aria-controls="<?php echo $listaP->IdPedido ?>">
+                        <i>Pedido <?php echo $i ?>: </i><?php echo $listaP->CantidadPlato." platos de ".$listaP->C_Plato ?>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="<?php echo $listaP->IdPedido ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+
+                      <div class="table-responsive">
+                        <table class="table table-hover">
+                          <thead>
+                            <tr>
+                              <th>Producto</th>
+                              <th>Cantidad</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php foreach ($listaP->getListaDetallePedido() as $listaDP): ?>
+                              <tr>
+                                <td><?php echo $listaDP->C_Almacen; ?></td>
+                                <td><?php echo $listaDP->Cantidad; ?></td>
+                              </tr>
+                            <?php endforeach; ?>
+                          </tbody>
+                        </table>
+
+                      </div>
+
+                    </div>
                   </div>
                 </div>
-              </div>
-            
+
+              <?php endforeach; ?>
+
             </div>
 
           </div>
