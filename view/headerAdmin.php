@@ -10,6 +10,8 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/bootstrap-select.min.css">
   <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/bootstrap-datepicker.min.css">
+
 
 </head>
 <body>
@@ -37,6 +39,14 @@
 		            <li role="separator" class="divider"></li>
 		            <li><a href="menuAdmin.php?modo=gProduct">Gestionar Productos</a></li>
 								<li><a href="#">Ingresar Producto a Almacen</a></li>
+		          </ul>
+		        </li>
+						<li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Almacen <span class="caret"></span></a>
+		          <ul class="dropdown-menu" style="background: white; ">
+		            <li><a href="menuAdmin.php?modo=gIngresarProducto">Ingresar Producto</a></li>
+		            <li role="separator" class="divider"></li>
+		           	<li><a href="menuAdmin.php?modo=detalleAlmacen">Detalle Almacen</a></li>
 		          </ul>
 		        </li>
 						<li><a href="menuAdmin.php?modo=gDespachos">Despachos</a></li>

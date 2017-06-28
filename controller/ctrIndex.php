@@ -80,6 +80,96 @@ class ManagePage
         include 'footerAdmin.php';
         break;
 
+      case 'gIngresarProducto':
+        include 'headerAdmin.php';
+        include 'bodyIngresarProducto.php';
+        include 'footerAdmin.php';
+        break;
+
+      case 'detalleAlmacen':
+        include 'headerAdmin.php';
+        include 'bodyDetalleAlmacen.php';
+        include 'footerAdmin.php';
+        break;
+
+      case 'registroExitosoAlmacen':
+        include 'headerAdmin.php';
+        ?>
+        <div class="row">
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-6">
+          <div class="alert alert-success alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong><h4><i class="fa fa-check-circle"></i>¡Exito!</h4></strong> <p>Al Registrar el Producto en el Almacen...</p>
+        </div>
+        </div>
+        </div>
+        <?php
+        include 'bodyIngresarProducto.php';
+        include 'footerAdmin.php';
+        break;
+
+      case 'rProductoAlmacen':
+      if (isset($_POST['datos'])) {
+        include '../model/conexion.php';
+        include '../model/ConsultasAlmacen.php';
+        include '../model/Almacen.php';
+        include '../model/DetalleAlmacen.php';
+        include '../controller/ctrAlmacen.php';
+        include '../controller/ctrDetalleAlmacen.php';
+
+        $con = new Conexion();
+
+        $manejadorAlmacen=new ConsultasAlmacen($con);
+        $datosUsuario=$manejadorAlmacen->idUsuarioAlmacen($_SESSION['user']);
+        $almacen=new Almacen();
+        $almacen->IdProducto=$_POST['producto'];
+        $almacen->Cantidad=$_POST['cantidadProducto'];
+
+        $detalleAlmacen=new DetalleAlmacen();
+        $detalleAlmacen->CantidadIngresada=$_POST['cantidadProducto'];
+        $detalleAlmacen->FechaRegistro=$_POST['fechaIngeso'];
+        $detalleAlmacen->PrecioTotal=$_POST['precioProducto'];
+        $detalleAlmacen->IdUsuario=$datosUsuario['idUsuario'];
+        $detalleAlmacen->FechaVencimiento=$_POST['fechaVencimiento'];
+        if ($detalleAlmacen->FechaVencimiento=="")
+          $detalleAlmacen->FechaVencimiento=null;
+
+        $existeProductoEnAlmacen=$manejadorAlmacen->existeProductoAlmacen($almacen->IdProducto);
+        $ctrAlmacen=new ctrAlmacen($con);
+        $ctrDetalleAlmacen=new ctrDetalleAlmacen($con);
+
+
+        if ($existeProductoEnAlmacen==true) {
+          // Existe producto
+          $ctrAlmacen->actualizarAlmacen($almacen);
+          $datoAlmacen=$manejadorAlmacen->idAlmacen($almacen->IdProducto);
+          $detalleAlmacen->IdAlmacen=$datoAlmacen['idAlmacen'];
+
+          $ctrDetalleAlmacen->insertarDetalleAlmacen($detalleAlmacen);
+
+          header("Location: menuAdmin.php?modo=registroExitosoAlmacen");
+
+        }
+        else {
+          // No existe producto
+          $ctrAlmacen->registrarAlmacen($almacen);
+          $datoAlmacen=$manejadorAlmacen->idAlmacen($almacen->IdProducto);
+          $detalleAlmacen->IdAlmacen=$datoAlmacen['idAlmacen'];
+
+          $ctrDetalleAlmacen->insertarDetalleAlmacen($detalleAlmacen);
+
+          header("Location: menuAdmin.php?modo=registroExitosoAlmacen");
+
+
+        }
+      }else {
+        header("Location: menuAdmin.php?modo=forVacioProd");
+      }
+      break;
+
+        break;
       // CRUD DE CATEGORIA Y METRICA START
       case 'gCategoriaProducto':
         include 'headerAdmin.php';
