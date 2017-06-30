@@ -49,6 +49,26 @@ class ConsultasBasicas
     }
   }
 
+  public function existeMetricaEditar($name, $id, $conn)
+  {
+    $consulta = $conn->prepare('SELECT * FROM udiadmedida where idUnidMedida != :id');
+    $consulta->bindParam(':id', $id);
+    $consulta->execute();
+    $registro = $consulta->fetchAll();
+    $existe = false;
+    if ($registro) {
+      foreach ($registro as $dato) {
+        if ($dato['nombre'] == $name) {
+            $existe = true;
+            break;
+        }
+      }
+      return $existe;
+    }else {
+      return $existe;
+    }
+  }
+
   public function listaCategorias($conn)
   {
     $consulta = $conn->prepare('SELECT * FROM categoriaProducto ORDER BY nombreCategoria');

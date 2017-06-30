@@ -44,6 +44,32 @@ class ManageMetrica
     return $listArray;
   }
 
+  public function editar($id, $nombre, $abreviatura, $name, $abbreviation)
+  {
+
+    if ((strtolower($nombre) == strtolower($name))&&(strtolower($abreviatura) == strtolower($abbreviation)))
+    {
+      header('Location: menuAdmin.php?modo=gCategoriaProducto');
+    }
+    else
+    {
+      $consuta = new ConsultasBasicas($this->Conexion);
+      $existe = $consuta->existeMetricaEditar($nombre, $id, $this->Conexion);
+      if ($existe == false)
+      {
+        $metrica = new Metrica(ucwords($nombre), $abreviatura);
+        $metrica->IdMetrica = $id;
+        $editar = new Editar();
+        $editar->editarMetrica($metrica, $this->Conexion);
+      }
+      else
+      {
+        header('Location: menuAdmin.php?modo=errEditarMD');
+      }
+    }
+
+  }
+
 }
 
 ?>

@@ -11,6 +11,7 @@ class UsuarioSesion
 
   public function crearSesion()
   {
+    $_SESSION['idUsuario'] = $this->Login->getIdUsuario();
     $_SESSION['user'] = $this->Login->getUsuario();
     $_SESSION['password'] = $this->Login->getPassword();
     $_SESSION['estado'] = $this->Login->getEstado();

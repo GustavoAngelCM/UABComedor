@@ -67,13 +67,69 @@ class ManageProducto
 
       $producto = new Producto($listaP['nombreProducto'], $cat, $met);
       $producto->IdProducto = $listaP['idProducto'];
-      
+
       $listArray[$i] = $producto;
       $i++;
 
     }
 
     return $listArray;
+  }
+
+  public function editar()
+  {
+    $efecto = "";
+    var_dump($_POST);
+    if (($_POST['nombre'] == $_POST['name'])&&($_POST['categoria'] == $_POST['cat'])&&($_POST['metrica'] == $_POST['met']))
+    {
+      $efecto = 0;
+    }
+    else
+    {
+      $productoModel = new ProductoModel($this->Conexion);
+
+      $existe = $productoModel->existeProductoEdit($_POST['id'], $_POST['nombre']);
+
+      if ($existe == false)
+      {
+        $producto = new Producto($_POST['nombre'], $_POST['categoria'], $_POST['metrica']);
+        $producto->IdProducto = $_POST['id'];
+        $correcto = $productoModel->edit($producto);
+        if ($correcto == true)
+        {
+          $efecto = 1;
+        }
+        else
+        {
+          $efecto = 2;
+        }
+
+      }
+      else
+      {
+        $efecto = 3;
+      }
+    }
+    return $efecto;
+  }
+
+  public function productosStock($plato)
+  {
+    $consulta = new ProductoModel($this->Conexion);
+    $listaProductos = $consulta->productosConCantidades($plato);
+    $listaArray = array();
+    $i = 0;
+    foreach ($listaProductos as $listaP)
+    {
+      $producto = new Producto($listaP['nombreProducto'], "", "");
+      $producto->IdProducto = $listaP['idProducto'];
+      $almacen = new Almacen();
+      $almacen->Cantidad = $listaP['cantidad'];
+      $almacen->C_Producto = $producto;
+      $listaArray[$i] = $almacen;
+      $i++;
+    }
+    return $listaArray;
   }
 
 }

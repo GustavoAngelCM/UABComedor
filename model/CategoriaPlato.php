@@ -1,22 +1,17 @@
 <?php
 
-class Despacho
+class CategoriaPlato
 {
 
-  private $IdDespacho;
-  private $CantidadRetirada;
-  private $PrecioRetiro;
-  private $FechaRetiro;
-  private $Observaciones;
+  private $IdCategoriaPlato;
+  private $NombreCategoriaPlato;
+  private $ListaPlatos;
 
-  private $C_Almacen;
-  private $C_Plato;
-  private $C_Usuario;
-
-  function __construct()
+  function __construct($nombreCategoria)
   {
-    $this->IdDespacho = null;
-    $this->Observaciones = null;
+    $this->IdCategoriaPlato =  null;
+    $this->NombreCategoriaPlato = $nombreCategoria;
+    $this->ListaPlatos = array();
   }
 
   public function __set($atributo, $value)
@@ -37,6 +32,8 @@ class Despacho
     }
 
   }
+
+  public function setListaPlatos($value){ $this->ListaPlatos[] = $value; }
 
 }
 

@@ -27,7 +27,7 @@
 			return $output;
 		}
 	}
-	$set=new SED();
-	$nombre=$set->encryption("jhonny");
-	echo $nombre;
+	// $set=new SED();
+	// $nombre=$set->encryption("jhonny");
+	// echo $nombre;
 ?>

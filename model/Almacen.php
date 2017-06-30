@@ -4,9 +4,10 @@ class Almacen
 {
 
   private $IdAlmacen;
-  private $IdProducto;
   private $Cantidad;
-
+  private $C_Producto;
+  private $IdProducto;
+  
   function __construct()
   {
     $this->IdAlmacen =  null;

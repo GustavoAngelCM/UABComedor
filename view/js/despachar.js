@@ -4,11 +4,12 @@ $(document).ready(function () {
 
 function despachar() {
   $("#despacharPedidos").click(function() {
-    
+    var frm = $(".despacho").serialize();
+    console.log(frm);
     $.ajax({
       "method" : "POST",
       "url" : "menuAdmin.php?modo=despacharPedidos",
-      "data" : 1
+      "data" : frm
     }).done( function(info) {
 
     $('#mensaje').html(info);

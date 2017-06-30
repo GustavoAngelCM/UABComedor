@@ -63,6 +63,16 @@ INSERT INTO almacen VALUE(null, 7, 30);
 INSERT INTO almacen VALUE(null, 8, 5000);
 INSERT INTO almacen VALUE(null, 9, 50);
 
+INSERT INTO detallealmacen VALUE(null, 1, 50, "2018-06-08", 600, now(), 1);
+INSERT INTO detallealmacen VALUE(null, 2, 50, "2018-06-08", 400, now(), 1);
+INSERT INTO detallealmacen VALUE(null, 3, 50, "2018-06-08", 1200, now(), 1);
+INSERT INTO detallealmacen VALUE(null, 4, 50, "2018-06-08", 60, now(), 1);
+INSERT INTO detallealmacen VALUE(null, 5, 30, "2018-06-08", 350, now(), 1);
+INSERT INTO detallealmacen VALUE(null, 6, 10, "2018-06-08", 500, now(), 1);
+INSERT INTO detallealmacen VALUE(null, 7, 30, "2018-06-08", 150, now(), 1);
+INSERT INTO detallealmacen VALUE(null, 8, 5000, "2018-06-08", 20, now(), 1);
+INSERT INTO detallealmacen VALUE(null, 9, 50, "2018-06-08", 50, now(), 1);
+
 INSERT INTO pedido VALUE(null, 1, 5, 0, now());
 
 INSERT INTO detallePedido VALUE(null, 1, 1, 1.50);
@@ -71,5 +81,16 @@ INSERT INTO detallePedido VALUE(null, 3, 1, 3.00);
 INSERT INTO detallePedido VALUE(null, 4, 1, 0.90);
 INSERT INTO detallePedido VALUE(null, 5, 1, 3.60);
 INSERT INTO detallePedido VALUE(null, 6, 1, 1.50);
-INSERT INTO detallePedido VALUE(null, 7, 1, 150.00);
+INSERT INTO detallePedido VALUE(null, 7, 1, 1.50);
 INSERT INTO detallePedido VALUE(null, 8, 1, 3.00);
+
+INSERT INTO pedido VALUE(null, 1, 15, 0, now());
+
+INSERT INTO detallePedido VALUE(null, 1, 2, 3.50);
+INSERT INTO detallePedido VALUE(null, 2, 2, 9.00);
+INSERT INTO detallePedido VALUE(null, 3, 2, 9.00);
+INSERT INTO detallePedido VALUE(null, 4, 2, 2.90);
+INSERT INTO detallePedido VALUE(null, 5, 2, 7.60);
+INSERT INTO detallePedido VALUE(null, 6, 2, 4.50);
+INSERT INTO detallePedido VALUE(null, 7, 2, 4.50);
+INSERT INTO detallePedido VALUE(null, 8, 2, 9.00);

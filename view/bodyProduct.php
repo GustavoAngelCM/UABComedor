@@ -21,11 +21,11 @@ $listaProd = $manageProd->listar();
         </div>
         <div class="row">
             <div class="col-sm-1 col-md-2"></div>
-            <div class="col-sm-10 col-md-8">
+            <div class="col-sm-10 col-md-8" id="RespuestaTabla">
 
                 <div class="panel panel-primary">
         					<div class="panel-heading">
-        						<h2 class="panel-title">Lista de Productos</h2>
+        						<h2 class="panel-title">Lista de Productos <h2 id="RespuestaMensaje"></h2></h2>
         						<div class="pull-right">
 											<a href="#RegistroProve" data-toggle="modal" class="clickable filter btn btn-success"><i class="fa fa-plus" data-toggle="tooltip" title="Añadir nuevo Producto"></i></a>
         							<span class="clickable filter btn btn-info" data-toggle="tooltip" title="Click aqui para buscar un Producto" data-container="body">
@@ -39,9 +39,7 @@ $listaProd = $manageProd->listar();
                             <th class="text-center">#</th>
                             <th class="text-center">Nombre</th>
                             <th class="text-center">Categoria</th>
-                            <th class="text-center">Ver</th>
-                            <th class="text-center">Editar</th>
-                            <th class="text-center">Estado</th>
+                            <th class="text-right">Editar</th>
                           </tr>
                         </thead>
                       </table>
@@ -63,22 +61,17 @@ $listaProd = $manageProd->listar();
                             <td><?php echo $i++; ?></td>
                             <td><?php echo ucwords(strtolower($listaP->NombreProducto)); ?></td>
                             <td><?php echo $listaP->C_Categoria->NombreCategoria; ?></td>
-                            <td><a href="#ver<?php echo $listaP->IdProducto; ?>" class="btn btn-danger efec" data-toggle="modal"><i class="fa fa-eye"></i></a></td>
-                            <td><a href="#editar<?php echo $listaP->IdProducto; ?>" class="btn btn-primary efec" data-toggle="modal"><i class="fa fa-pencil"></i></a></td>
-                            <td>
-                              <form  id="dardeBajaProd">
-                                <input type="hidden" name="id" value="<?php echo $listaP->IdProducto; ?>">
-                                <button type="submit" name="dabaja" class="btn btn-success efec"><i class="fa fa-toggle-on"></i></button>
-                              </form>
-                            </td>
+                            <td><a href="#editar<?php echo $listaP->IdProducto; ?>" class="btn btn-primary" data-toggle="modal"><i class="fa fa-pencil"></i></a></td>
                           </tr>
+                          <?php
+                            include 'modalForm/editarProducto.php';
+                          ?>
                         <?php endforeach; ?>
 
                       </tbody>
                     </table>
                   </div>
-                  </div>
-
+                </div>
               </div>
               <div class="col-sm-1 col-md-2"></div>
             </div>
