@@ -53,6 +53,15 @@ class ConsultasAlmacen
         $registro = $consulta->fetch();
         return $registro;
   }
+  public function idMaxDetalleAlmacen()
+  {
+        $query = "SELECT MAX(idDetalle)
+                  FROM detalleAlmacen";
+        $consulta = $this->Conexion->prepare($query);
+        $consulta->execute();
+        $registro = $consulta->fetch();
+        return $registro;
+  }
 
   public function listaDetalleAlmacen()
   {
@@ -61,7 +70,8 @@ class ConsultasAlmacen
                   WHERE da.idAlmacen=a.idAlmacen
                   AND a.idProducto=p.idProducto
                   AND p.idUnidMedida=um.idUnidMedida
-                  AND da.idUsuario=u.idUsuario";
+                  AND da.idUsuario=u.idUsuario
+                  ORDER BY da.fechaRegistro DESC";
         $consulta = $this->Conexion->prepare($query);
         $consulta->execute();
         $registro = $consulta->fetchAll();

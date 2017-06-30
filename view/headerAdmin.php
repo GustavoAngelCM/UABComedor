@@ -51,7 +51,14 @@
 		        </li>
 						<li><a href="menuAdmin.php?modo=gDespachos">Despachos</a></li>
 						<li><a href="#">Nutrionista</a></li>
-						<li><a href="#">Reportes</a></li>
+						<li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reportes <span class="caret"></span></a>
+		          <ul class="dropdown-menu" style="background: white; ">
+		            <li><a href="menuAdmin.php?modo=reporteAlmacen">Almacen</a></li>
+		            <li role="separator" class="divider"></li>
+		           	<li><a href="#">Otro</a></li>
+		          </ul>
+		        </li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#"><?php echo ucwords(strtolower($_SESSION['user'])); ?></a></li>

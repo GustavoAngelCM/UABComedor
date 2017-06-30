@@ -86,12 +86,23 @@ class ManagePage
         include 'footerAdmin.php';
         break;
 
+      case 'reporteDetalle1':
+        include 'headerAdmin.php';
+        include 'bodyReporteAlmacenVista.php';
+        include 'footerAdmin.php';
+        break;
+
       case 'detalleAlmacen':
         include 'headerAdmin.php';
         include 'bodyDetalleAlmacen.php';
         include 'footerAdmin.php';
         break;
 
+      case 'reporteAlmacen':
+        include 'headerAdmin.php';
+        include 'bodyReporteAlmacen.php';
+        include 'footerAdmin.php';
+        break;
       case 'registroExitosoAlmacen':
         include 'headerAdmin.php';
         ?>
@@ -116,8 +127,10 @@ class ManagePage
         include '../model/ConsultasAlmacen.php';
         include '../model/Almacen.php';
         include '../model/DetalleAlmacen.php';
+        include '../model/Factura.php';
         include '../controller/ctrAlmacen.php';
         include '../controller/ctrDetalleAlmacen.php';
+        include '../controller/ctrFactura.php';
 
         $con = new Conexion();
 
@@ -136,34 +149,34 @@ class ManagePage
         if ($detalleAlmacen->FechaVencimiento=="")
           $detalleAlmacen->FechaVencimiento=null;
 
+        $factura=new Factura;
+
+
         $existeProductoEnAlmacen=$manejadorAlmacen->existeProductoAlmacen($almacen->IdProducto);
         $ctrAlmacen=new ctrAlmacen($con);
         $ctrDetalleAlmacen=new ctrDetalleAlmacen($con);
+        $ctrFactura=new ctrFactura($con);
 
-
-        if ($existeProductoEnAlmacen==true) {
-          // Existe producto
+        if ($existeProductoEnAlmacen==true)
           $ctrAlmacen->actualizarAlmacen($almacen);
-          $datoAlmacen=$manejadorAlmacen->idAlmacen($almacen->IdProducto);
-          $detalleAlmacen->IdAlmacen=$datoAlmacen['idAlmacen'];
 
-          $ctrDetalleAlmacen->insertarDetalleAlmacen($detalleAlmacen);
-
-          header("Location: menuAdmin.php?modo=registroExitosoAlmacen");
-
-        }
-        else {
-          // No existe producto
+        else
           $ctrAlmacen->registrarAlmacen($almacen);
-          $datoAlmacen=$manejadorAlmacen->idAlmacen($almacen->IdProducto);
-          $detalleAlmacen->IdAlmacen=$datoAlmacen['idAlmacen'];
 
-          $ctrDetalleAlmacen->insertarDetalleAlmacen($detalleAlmacen);
+        $datoAlmacen=$manejadorAlmacen->idAlmacen($almacen->IdProducto);
+        $detalleAlmacen->IdAlmacen=$datoAlmacen['idAlmacen'];
+        $ctrDetalleAlmacen->insertarDetalleAlmacen($detalleAlmacen);
+        $idDetalleAlmacen=$manejadorAlmacen->idMaxDetalleAlmacen();
+        $factura->NumFactura=$_POST['numeroFactura'];
 
-          header("Location: menuAdmin.php?modo=registroExitosoAlmacen");
-
-
+        if ($factura->NumFactura!="") {
+          $factura->IdDetalle=$idDetalleAlmacen['MAX(idDetalle)'];
+          $factura->ValorIva=$_POST['valorIva'];
+          $ctrFactura->registrarFactura($factura);
         }
+
+        header("Location: menuAdmin.php?modo=registroExitosoAlmacen");
+
       }else {
         header("Location: menuAdmin.php?modo=forVacioProd");
       }

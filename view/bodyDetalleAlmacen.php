@@ -18,6 +18,7 @@ $listaAlmacen = $manageAlmacen->detalleAlmacen();
         					<div class="panel-heading">
         						<h2 class="panel-title">Lista de Almacen</h2>
         						<div class="pull-right">
+                      <a href="tablaLlenoPDF.php" class="btn btn-danger btn-sm exportarFormularioPDFVER">Exportar PDF <i class="fa fa-file-pdf-o"></i></a>
 											<a href="menuAdmin.php?modo=gIngresarProducto" class="clickable filter btn btn-success"><i class="fa fa-plus" data-toggle="tooltip" title="Añadir nuevo Producto al almacen"></i></a>
         							<span class="clickable filter btn btn-info" data-toggle="tooltip" title="Click aqui para buscar un Producto" data-container="body">
         								<i class="fa fa-search"></i>

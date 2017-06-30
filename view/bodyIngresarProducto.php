@@ -73,8 +73,8 @@ $listaProd = $manageProd->listar();
 
                           <div class="form-group">
                             <label>Fecha de Vencimiento</label>
-                            <input style="width:15%" type="checkbox" id="fv" name="fv" value="true" onClick="mostrarOcultar()" checked >SI</input>
-                            <div  style="display:block" id="fechaDeVencimiento">
+                            <input style="width:15%" type="checkbox" id="fv" name="fv" value="true" onClick="mostrarOcultar()" >SI</input>
+                            <div  style="display:none" id="fechaDeVencimiento">
                               <div class="input-group"  >
                                 <span class="input-group-addon" style="background: red; color:white" id="fechaDeVencimiento1"><i class="fa fa-calendar"></i></span>
                                 <input id="fechaDeVencimiento2" name="fechaVencimiento" type="text" class="form-control datepicker" data-date-format="yyyy/mm/dd" readonly="true" placeholder="Fecha de Vencimiento:  AAAA/MM/DD" aria-describedby="sizing-addon2" >
@@ -99,8 +99,8 @@ $listaProd = $manageProd->listar();
 
                           <div class="form-group">
                             <label>Factura</label>
-                            <input style="width:15%" type="checkbox" id="opcFactura" name="opcFactura" value="true" onClick="mostrarOcultarFac()" checked >SI</input>
-                            <div  style="display:block" id="factura">
+                            <input style="width:15%" type="checkbox" id="opcFactura" name="opcFactura" value="true" onClick="mostrarOcultarFac()" >SI</input>
+                            <div  style="display:none" id="factura">
                               <div class="form-group">
                                 <label>Numero Factura</label>
                                 <div class="input-group">
@@ -112,7 +112,7 @@ $listaProd = $manageProd->listar();
                                 <label>Valor IVA</label>
                                 <div class="input-group">
                                   <span class="input-group-addon" id="sizing-addon2" ><i class="fa fa-sort-numeric-asc"></i></span>
-                                  <input type="text" id="iva" class="form-control" placeholder="Valor IVA" aria-describedby="sizing-addon2" name="valorIva" disabled>
+                                  <input type="text" id="iva" class="form-control" placeholder="Valor IVA" aria-describedby="sizing-addon2" name="valorIva" readonly >
                                 </div>
                               </div>
                             </div>
@@ -121,18 +121,16 @@ $listaProd = $manageProd->listar();
 
                           <script language="JavaScript">
                           var valorIva=0;
-                          var totalIva=0;
                           function mostrarOcultarFac() {
                               if (document.getElementById('opcFactura').checked==false){
-                               valorIva=$('#precioTotal').val();
-                               totalIva=valorIva*0.13;
-                              // document.getElementById('fechaDeVencimientoIcon').style.display='none';
                               document.getElementById('factura').style.display='none';
                               }
                               else{
-                              // document.getElementById('fechaDeVencimientoIcon').style.display='block';
+                              valorIva=$('#precioTotal').val();
+                              valorIva=valorIva*0.13;
+                              // $('#iva').val(valorIva);
+                              document.getElementById('iva').value = valorIva;
                               document.getElementById('factura').style.display='block';
-                              $('#iva').val(totalIva);
                             }
                           }
                           </script>
@@ -165,7 +163,7 @@ $listaProd = $manageProd->listar();
                           <table class="table table-hover" id="dev-table" >
                             <div class="table-responsive">
                               <table class="table">
-                                <thead class="desk">
+                                <thead class="desk" style="background:red; color:white;">
                                   <tr>
                                     <th class="text-center">Fecha de Registro</th>
                                     <th class="text-center">Producto</th>
@@ -173,7 +171,7 @@ $listaProd = $manageProd->listar();
                                     <th class="text-center">Unidad de Medida</th>
                                     <th class="text-center">Cantidad Total</th>
                                     <th class="text-center">Fecha de Vencimiento</th>
-                                    <th class="text-center">Usuario que registro</th>
+                                    <th class="text-center">Usuario</th>
                                   </tr>
                                 </thead>
 
