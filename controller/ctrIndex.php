@@ -153,69 +153,110 @@ class ManagePage
         include 'footerAdmin.php';
         break;
 
-      case 'exiEditProd':
+
+      case 'gIngresarProducto':
+        include 'headerAdmin.php';
+        include 'bodyIngresarProducto.php';
+        include 'footerAdmin.php';
+        break;
+
+      case 'reporteDetalle1':
+        include 'headerAdmin.php';
+        include 'bodyReporteAlmacenVista.php';
+        include 'footerAdmin.php';
+        break;
+
+      case 'detalleAlmacen':
+        include 'headerAdmin.php';
+        include 'bodyDetalleAlmacen.php';
+        include 'footerAdmin.php';
+        break;
+
+      case 'reporteAlmacen':
+        include 'headerAdmin.php';
+        include 'bodyReporteAlmacen.php';
+        include 'footerAdmin.php';
+        break;
+      case 'registroExitosoAlmacen':
         include 'headerAdmin.php';
         ?>
-        <div class="alert alert-success alert-dismissable">
+        <div class="row">
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-6">
+          <div class="alert alert-success alert-dismissable">
           <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <strong><i class="fa fa-check-circle"></i>Exito!</strong> <p>Al Editar Producto</p>
+          <strong><h4><i class="fa fa-check-circle"></i>¡Exito!</h4></strong> <p>Al Registrar el Producto en el Almacen...</p>
+        </div>
+        </div>
         </div>
         <?php
-        include 'bodyProduct.php';
+        include 'bodyIngresarProducto.php';
         include 'footerAdmin.php';
         break;
 
-      case 'errEditProd':
-        include 'headerAdmin.php';
-        ?>
-        <div class="alert alert-danger alert-dismissable">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <strong><i class="fa fa-times-circle"></i>Error!</strong> <p>Al Editar Producto</p>
-        </div>
-        <?php
-        include 'bodyProduct.php';
-        include 'footerAdmin.php';
-        break;
+      case 'rProductoAlmacen':
+      if (isset($_POST['datos'])) {
+        include '../model/conexion.php';
+        include '../model/ConsultasAlmacen.php';
+        include '../model/Almacen.php';
+        include '../model/DetalleAlmacen.php';
+        include '../model/Factura.php';
+        include '../controller/ctrAlmacen.php';
+        include '../controller/ctrDetalleAlmacen.php';
+        include '../controller/ctrFactura.php';
 
-      case 'gCatPlato':
-        include 'headerAdmin.php';
-        include 'bodyCatPlato.php';
-        include 'footerAdmin.php';
-        break;
+        $con = new Conexion();
 
-      case 'eProd':
-        if (isset($_POST['datos']))
-        {
-          include '../model/conexion.php';
-          include '../model/producto.php';
-          include '../model/ProductoModel.php';
-          include '../controller/ctrProducto.php';
+        $manejadorAlmacen=new ConsultasAlmacen($con);
+        $datosUsuario=$manejadorAlmacen->idUsuarioAlmacen($_SESSION['user']);
+        $almacen=new Almacen();
+        $almacen->IdProducto=$_POST['producto'];
+        $almacen->Cantidad=$_POST['cantidadProducto'];
 
-          $conexion =  new Conexion();
-          $productoModel = new ManageProducto($conexion);
-          $efecto = $productoModel->editar();
-            switch ($efecto) {
-              case 1:
-                header("Location: menuAdmin.php?modo=exiEditProd");
-                break;
-              case 2:
-                header("Location: menuAdmin.php?modo=errEditProd");
-                break;
-              case 3:
-                header("Location: menuAdmin.php?modo=pExi");
-                break;
-              case 0:
-                header("Location: menuAdmin.php?modo=gProduct");
-                break;
-            }
-        }
+        $detalleAlmacen=new DetalleAlmacen();
+        $detalleAlmacen->CantidadIngresada=$_POST['cantidadProducto'];
+        $detalleAlmacen->FechaRegistro=$_POST['fechaIngeso'];
+        $detalleAlmacen->PrecioTotal=$_POST['precioProducto'];
+        $detalleAlmacen->IdUsuario=$datosUsuario['idUsuario'];
+        $detalleAlmacen->FechaVencimiento=$_POST['fechaVencimiento'];
+        if ($detalleAlmacen->FechaVencimiento=="")
+          $detalleAlmacen->FechaVencimiento=null;
+
+        $factura=new Factura;
+
+
+        $existeProductoEnAlmacen=$manejadorAlmacen->existeProductoAlmacen($almacen->IdProducto);
+        $ctrAlmacen=new ctrAlmacen($con);
+        $ctrDetalleAlmacen=new ctrDetalleAlmacen($con);
+        $ctrFactura=new ctrFactura($con);
+
+        if ($existeProductoEnAlmacen==true)
+          $ctrAlmacen->actualizarAlmacen($almacen);
+
         else
-        {
-          header("Location: menuAdmin.php?modo=forVacioProd");
+          $ctrAlmacen->registrarAlmacen($almacen);
+
+        $datoAlmacen=$manejadorAlmacen->idAlmacen($almacen->IdProducto);
+        $detalleAlmacen->IdAlmacen=$datoAlmacen['idAlmacen'];
+        $ctrDetalleAlmacen->insertarDetalleAlmacen($detalleAlmacen);
+        $idDetalleAlmacen=$manejadorAlmacen->idMaxDetalleAlmacen();
+        $factura->NumFactura=$_POST['numeroFactura'];
+
+        if ($factura->NumFactura!="") {
+          $factura->IdDetalle=$idDetalleAlmacen['MAX(idDetalle)'];
+          $factura->ValorIva=$_POST['valorIva'];
+          $ctrFactura->registrarFactura($factura);
         }
 
-        break;
+        header("Location: menuAdmin.php?modo=registroExitosoAlmacen");
 
+      }else {
+        header("Location: menuAdmin.php?modo=forVacioProd");
+      }
+
+
+        break;
       // CRUD DE CATEGORIA Y METRICA START
       case 'gCategoriaProducto':
         include 'headerAdmin.php';

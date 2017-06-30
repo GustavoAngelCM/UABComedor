@@ -4,13 +4,16 @@ class Almacen
 {
 
   private $IdAlmacen;
+
   private $Cantidad;
 
   private $C_Producto;
 
+  private $IdProducto;
+
   function __construct()
   {
-    $this->IdAlmacen = null;
+    $this->IdAlmacen =  null;
   }
 
   public function __set($atributo, $value)
@@ -31,6 +34,7 @@ class Almacen
     }
 
   }
+
 
 }
 

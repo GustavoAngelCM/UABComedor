@@ -94,3 +94,14 @@ INSERT INTO detallePedido VALUE(null, 5, 2, 7.60);
 INSERT INTO detallePedido VALUE(null, 6, 2, 4.50);
 INSERT INTO detallePedido VALUE(null, 7, 2, 4.50);
 INSERT INTO detallePedido VALUE(null, 8, 2, 9.00);
+
+INSERT INTO pedido VALUE(null, null, 0, 0, now());
+
+INSERT INTO detallePedido VALUE(null, 1, 3, 3.50);
+INSERT INTO detallePedido VALUE(null, 2, 3, 9.00);
+INSERT INTO detallePedido VALUE(null, 3, 3, 9.00);
+INSERT INTO detallePedido VALUE(null, 4, 3, 2.90);
+INSERT INTO detallePedido VALUE(null, 5, 3, 7.60);
+INSERT INTO detallePedido VALUE(null, 6, 3, 4.50);
+INSERT INTO detallePedido VALUE(null, 7, 3, 4.50);
+INSERT INTO detallePedido VALUE(null, 8, 3, 9.00);
