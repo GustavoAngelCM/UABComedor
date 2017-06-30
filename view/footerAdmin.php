@@ -6,5 +6,6 @@
 		<script src="js/bootstrap-select.min.js"></script>
 		<script src="js/table.js"></script>
 		<script src="js/despachar.js"></script>
+		<script src="js/validarCampos.js"></script>
 </body>
 </html>

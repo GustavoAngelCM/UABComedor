@@ -1,7 +1,7 @@
 <div class="modal fade" id="editar<?php echo $listaM->NombreMetrica; ?>">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="" method="post">
+      <form action="menuAdmin.php?modo=edMet" method="post">
         <div class="modal-header">
           <button type="button" name="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h3 class="modal-title">Editar <i class="fa fa-arrow-right"></i> UNIDAD DE MEDIDA</h3>
@@ -10,13 +10,13 @@
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-addon" id="sizing-addon2" style="background:red; color:white"><i class="fa fa-linode"></i></span>
-              <input type="text" class="form-control" placeholder="Nombre Unidad de Medida: <?php echo $listaM->NombreMetrica; ?>" value="<?php echo $listaM->NombreMetrica; ?>" aria-describedby="sizing-addon2" name="nombre" required>
+              <input type="text" name="nombre" class="form-control" placeholder="Nombre Unidad de Medida: <?php echo $listaM->NombreMetrica; ?>" value="<?php echo $listaM->NombreMetrica; ?>" aria-describedby="sizing-addon2" required>
             </div>
           </div>
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-addon" id="sizing-addon2" style="background:red; color:white"><i class="fa fa-linode"></i></span>
-              <input type="text" class="form-control" placeholder="Abreviatura Unidad de Medida: <?php echo $listaM->Abreviatura; ?>" value="<?php echo $listaM->Abreviatura; ?>" aria-describedby="sizing-addon2" name="abrev" required>
+              <input type="text" name="abrev" class="form-control" placeholder="Abreviatura Unidad de Medida: <?php echo $listaM->Abreviatura; ?>" value="<?php echo $listaM->Abreviatura; ?>" aria-describedby="sizing-addon2" required>
             </div>
           </div>
           <input type="hidden" name="datos" value="1">

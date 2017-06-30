@@ -11,46 +11,45 @@ $conexion = new Conexion();
 $pedidoManage = new ManagePedido($conexion);
 $listaPedidos = $pedidoManage->listar();
 $i = 0;
-//var_dump($listaPedidos);
 
 ?>
 <div class="container">
   <div class="row">
 
-    <div class="text-center well" style="opacity:0.9">
+    <div class="text-center" style="opacity:0.9;">
         <h1>DESPACHOS</h1>
     </div>
 
-    <div class="col-sm-1 col-md-1"></div>
-    <div class="col-sm-10 col-md-10">
+    <div class="col-xs-1 col-sm-1 col-md-1"></div>
+    <div class="col-xs-10 col-sm-10 col-md-10">
+      <br><br>
+      <div class="panel panel-primary">
+        <div class="panel-heading" style="background-color: rgb(53, 116, 136)"><h4><strong>Lista De Pedidos</strong></h4>
+          <center><button type="button" name="despachar" class="btn btn-success btn-lg" id="despacharPedidos">Despachar Pedidos</button></center>
+        </div>
+        <div class="panel-body" style="height: 400px">
 
-      <div class="" style="opacity: 0.93;">
-        <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#pedidos" aria-controls="pedidos" role="tab" data-toggle="tab"><i class="fa fa-shopping-bag"></i>  <span>Pedios En Espera a ser Despachados</span></a></li>
-          <li role="presentation"><a href="#despachosHoy" aria-controls="despachosHoy" role="tab" data-toggle="tab"><i class="fa fa-shopping-basket"></i>  <span>Pedidos Despachados Hoy</span></a></li>
-          <li role="presentation"><a href="#despachos" aria-controls="despachos" role="tab" data-toggle="tab"><i class="fa fa-shopping-cart"></i>  <span>Despachos Realizados</span></a></li>
-
-        </ul>
-
-        <!-- Tab panes -->
-        <div class="tab-content card">
-          <div role="tabpanel" class="tab-pane active" id="pedidos">
-            <button type="button" name="despachar" class="btn btn-success btn-lg" id="despacharPedidos">Despachar Pedidos</button>
-            <br><div id="mensaje"></div><br>
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-
-              <?php foreach ($listaPedidos as $listaP): $i++;?>
-
-                <div class="panel panel-warning">
-                  <div class="panel-heading" role="tab" id="headingTwo">
-                    <h4 class="panel-title">
-                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $listaP->IdPedido ?>" aria-expanded="false" aria-controls="<?php echo $listaP->IdPedido ?>">
-                        <i>Pedido <?php echo $i ?>: </i><?php echo $listaP->CantidadPlato." platos de ".$listaP->C_Plato ?>
+          <br><div id="mensaje">
+            <br>
+            <?php if ($listaPedidos)
+            {
+               foreach ($listaPedidos as $listaP): $i++;?>
+                <div class="panel panel-primary">
+                  <div class="panel-heading" id="accordion">
+                    <input type="checkbox" class="despacho" name="despacho[]" value="<?php echo $listaP->IdPedido ?>">
+                    <?php if ($listaP->C_Plato): ?>
+                      <span class="fa fa-shopping-bag"></span> </i><?php echo $listaP->CantidadPlato." platos de ".$listaP->C_Plato ?>
+                    <?php else: ?>
+                      <span class="fa fa-shopping-bag"></span> </i>Productos Independientes
+                    <?php endif; ?>
+                    <div class="btn-group pull-right">
+                      <a type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-parent="#accordion" href="#detalle<?php echo $listaP->IdPedido; ?>">
+                        <span class="fa fa-chevron-down"></span>
                       </a>
-                    </h4>
+                    </div>
                   </div>
-                  <div id="<?php echo $listaP->IdPedido ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                    <div class="panel-body">
+                  <div id="detalle<?php echo $listaP->IdPedido ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body" style="height: 200px">
 
                       <div class="table-responsive">
                         <table class="table table-hover">
@@ -69,28 +68,23 @@ $i = 0;
                             <?php endforeach; ?>
                           </tbody>
                         </table>
-
                       </div>
-
                     </div>
                   </div>
                 </div>
+              <?php endforeach;
+            }
+            else { ?>
+              <div class="text-center">
+                <p style="color:red">No Existen pedidos a ser despachados</p>
+              </div>
+            <?php } ?>
 
-              <?php endforeach; ?>
-
-            </div>
-
-          </div>
-          <div role="tabpanel" class="tab-pane" id="despachosHoy">
-
-          </div>
-          <div role="tabpanel" class="tab-pane" id="despachos"></div>
-
+          </div><br>
         </div>
       </div>
-
     </div>
-    <div class="col-sm-1 col-md-1"></div>
+    <div class="col-xs-1 col-sm-1 col-md-1"></div>
 
   </div>
 </div>

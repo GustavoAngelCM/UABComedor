@@ -1,22 +1,16 @@
 <?php
 
-class Despacho
+class Almacen
 {
 
-  private $IdDespacho;
-  private $CantidadRetirada;
-  private $PrecioRetiro;
-  private $FechaRetiro;
-  private $Observaciones;
+  private $IdAlmacen;
+  private $Cantidad;
 
-  private $C_Almacen;
-  private $C_Plato;
-  private $C_Usuario;
+  private $C_Producto;
 
   function __construct()
   {
-    $this->IdDespacho = null;
-    $this->Observaciones = null;
+    $this->IdAlmacen = null;
   }
 
   public function __set($atributo, $value)

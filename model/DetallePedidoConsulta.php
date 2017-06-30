@@ -12,12 +12,13 @@ class DetallePedidoConsulta
 
   public function listaDetallePedido($pedido)
   {
-    $query = "SELECT d.idDetallePedido, p.nombreProducto, u.abreviatura, d.idPedido, d.cantidad
-              FROM detallepedido d, almacen a, producto p, udiadmedida u
+    $query = "SELECT d.idDetallePedido, a.idAlmacen, p.nombreProducto, u.abreviatura, u.nombre, cp.nombreCategoria, d.idPedido, d.cantidad
+              FROM detallepedido d, almacen a, producto p, udiadmedida u, categoriaproducto cp
               WHERE d.idAlmacen = a.idAlmacen
-              AND a.idProducto = p.idProducto 
+              AND a.idProducto = p.idProducto
               AND p.idUnidMedida = u.idUnidMedida
-              AND idPedido = :pedido";
+              AND p.idCatProducto = cp.idCatProducto
+              AND d.idPedido = :pedido";
     $consulta = $this->Conexion->prepare($query);
     $consulta->bindParam(':pedido', $pedido);
     $consulta->execute();

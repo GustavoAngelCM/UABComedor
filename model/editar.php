@@ -33,6 +33,34 @@ class Editar
     return $error;
   }
 
+  public function editarMetrica($metrica, $conn)
+  {
+    try {
+
+      $conn->beginTransaction();
+
+      $query = 'UPDATE udiadmedida
+                SET nombre = :nombreCategoria,
+                  abreviatura = :abreviatura
+                WHERE idUnidMedida = :id';
+
+      $stmtMet = $conn->prepare($query);
+      var_dump($metrica);
+      $stmtMet->bindValue(':nombreCategoria', $metrica->NombreMetrica);
+      $stmtMet->bindValue(':abreviatura', $metrica->Abreviatura);
+      $stmtMet->bindValue(':id', $metrica->IdMetrica);
+
+      $stmtMet->execute();
+
+      $conn->commit();
+      header('Location: menuAdmin.php?modo=exEditarM');
+
+    } catch (PDOException $e) {
+      $conn->rollBack();
+      header('Location: menuAdmin.php?modo=errEditarM');
+    }
+  }
+
 }
 
 ?>
