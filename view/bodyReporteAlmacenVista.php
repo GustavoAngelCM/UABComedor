@@ -87,7 +87,6 @@ $listaProd = $manajadorProd->listar();
                         <td></td>
                         <td></td>
                         <td></td>
-                      <!-- <td><strong>Cantidad TOTAL <?php //echo $totalCantidad."  ".$listaA['abreviatura']; ?></strong></td> -->
                       </tfoot>
                     </table>
                   </div>

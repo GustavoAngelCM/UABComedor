@@ -153,6 +153,68 @@ class ManagePage
         include 'footerAdmin.php';
         break;
 
+      case 'exiEditProd':
+        include 'headerAdmin.php';
+        ?>
+        <div class="alert alert-success alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong><i class="fa fa-check-circle"></i>Exito!</strong> <p>Al Editar Producto</p>
+        </div>
+        <?php
+        include 'bodyProduct.php';
+        include 'footerAdmin.php';
+        break;
+
+      case 'errEditProd':
+        include 'headerAdmin.php';
+        ?>
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong><i class="fa fa-times-circle"></i>Error!</strong> <p>Al Editar Producto</p>
+        </div>
+        <?php
+        include 'bodyProduct.php';
+        include 'footerAdmin.php';
+        break;
+
+      case 'gCatPlato':
+        include 'headerAdmin.php';
+        include 'bodyCatPlato.php';
+        include 'footerAdmin.php';
+        break;
+
+      case 'eProd':
+        if (isset($_POST['datos']))
+        {
+          include '../model/conexion.php';
+          include '../model/producto.php';
+          include '../model/ProductoModel.php';
+          include '../controller/ctrProducto.php';
+
+          $conexion =  new Conexion();
+          $productoModel = new ManageProducto($conexion);
+          $efecto = $productoModel->editar();
+            switch ($efecto) {
+              case 1:
+                header("Location: menuAdmin.php?modo=exiEditProd");
+                break;
+              case 2:
+                header("Location: menuAdmin.php?modo=errEditProd");
+                break;
+              case 3:
+                header("Location: menuAdmin.php?modo=pExi");
+                break;
+              case 0:
+                header("Location: menuAdmin.php?modo=gProduct");
+                break;
+            }
+        }
+        else
+        {
+          header("Location: menuAdmin.php?modo=forVacioProd");
+        }
+
+        break;
 
       case 'gIngresarProducto':
         include 'headerAdmin.php';
